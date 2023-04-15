@@ -12,6 +12,9 @@ import salesRoutes from './routes/sales.js'
 import connectDB from './database/connectDB.js'
 
 
+import User from './models/User.js'
+import {dataUser} from './data/index.js'
+
 /* CONFIGURATION */
 dotenv.config()
 
@@ -28,12 +31,15 @@ app.use(cors());
 
 
 /* ROUTES */
-app.use('/client', clientRoutes)
-app.use('/general', generalRoutes)
+app.use('/api/v1/client', clientRoutes)
+app.use('/api/v1/general', generalRoutes)
 app.use('/management', managementRoutes)
 app.use('/sales', salesRoutes)
 
 /* MoNGOOSE */
+
+
+//data 
 
 
 const port = process.env.PORT || 3000
@@ -44,6 +50,7 @@ const start =async()=>{
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`)
         })
+      
         
     } catch (error) {
         console.log(error)
