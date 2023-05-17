@@ -14,3 +14,29 @@ export interface User{
     occupation:string;
     transactions: string[];
   }
+
+
+
+  export interface Product{
+    _id: string;
+    name: string;
+    description: string;
+    category:string;
+    rating: number;
+    supply:number;
+    price:number;
+  }
+
+  export interface ProductStat{
+    product: Product;
+    yearlySalesTotal:number;
+    yearlyTotalSoldUnits:number;
+    monthlyData: [
+      {
+        month: string;
+        totalSales: number;
+        totalUnits: number;
+        _id: string;
+      }
+    ]
+  }

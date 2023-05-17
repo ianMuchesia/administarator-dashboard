@@ -5,6 +5,7 @@ import { themeSettings } from "./theme"
 import { useAppSelector } from "./hooks"
 import Dashboard from './scenes/dashboard' 
 import Layout from './scenes/layout'
+import Products from './scenes/products'
 import {BrowserRouter , Routes , Route, Navigate } from "react-router-dom"
 
 
@@ -27,6 +28,7 @@ function App() {
       <Route element={<Layout />}>
       <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>
+      <Route path="/products" element={<Products/>}/>
       </Route>
    </Routes>
    </ThemeProvider>
