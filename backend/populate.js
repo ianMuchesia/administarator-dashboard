@@ -3,10 +3,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import User from './models/User.js'
-import {dataProduct , dataProductStat} from './data/index.js'
+import {dataProduct , dataProductStat, dataTransaction} from './data/index.js'
 import connectDB from './database/connectDB.js';
 import Product from './models/Product.js';
 import ProductStat from './models/ProductStat.js';
+import Transaction from './models/Transaction.js';
 
 
 
@@ -25,6 +26,9 @@ const start = async()=>{
        await 
        ProductStat.create(dataProductStat) 
  */
+
+       /* await Transaction.deleteMany()
+       await Transaction.create(dataProductStat) */
         console.log('success!!!')
         process.exit(0)
     } catch (error) {
