@@ -16,6 +16,7 @@ import Header from "../../components/Header";
 import { ThemeOptions } from "../../@types/pallette";
 import { ProductStat } from "../../@types/types";
 
+
 interface Props {
     item:  ProductStat;
     
@@ -107,8 +108,8 @@ const Products = () => {
             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
           }}
         >
-            {data.products.map(
-            (item) => (
+            {data?.products.map(
+            (item:any) => (
               <SingleProduct
                 key={item._id}
                 item={item}
