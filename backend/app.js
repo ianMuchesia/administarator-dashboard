@@ -12,6 +12,8 @@ import salesRoutes from './routes/sales.js'
 import connectDB from './database/connectDB.js'
 
 
+//data imports
+
 import User from './models/User.js'
 import {dataUser} from './data/index.js'
 
@@ -47,6 +49,7 @@ const port = process.env.PORT || 3000
 const start =async()=>{
     try {
         connectDB(process.env.MONGO_URI)
+        
         app.listen(port, () => {
             console.log(`Server is running on port ${port}`)
         })
