@@ -27,8 +27,8 @@ const start = async()=>{
        ProductStat.create(dataProductStat) 
  */
 
-       /* await Transaction.deleteMany()
-       await Transaction.create(dataProductStat) */
+       await Transaction.deleteMany()
+       await Transaction.create(dataTransaction) 
         console.log('success!!!')
         process.exit(0)
     } catch (error) {

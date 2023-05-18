@@ -25,33 +25,72 @@ const getCustomers = async(req, res)=>{
 
 
 const getTransactions = async(req ,res)=>{
-    //sort should look like this : {"field": "userId", "sort":"desc"}
-    const {page  = 1 , pageSize = 20, sort = null, search = ""}= req.query
 
-    //formatted sort should look like { userId:-1}
+     const { search , sort , page , pageSize} = req.query
 
-    const generateSort = ()=>{
+     console.log("search is" + search ,"page is"+page,"sort is"+ sort ,"pageSize is"+ pageSize )
+    let queryObject = {}
+
+    let total = await Transaction.countDocuments({});
+    if (search) {
+        queryObject = {
+          
+            cost: { $regex: new RegExp(search, "i") } 
+         
+        };
+        total = await Transaction.countDocuments(queryObject);
+      }
+    let result = Transaction.find(queryObject);
+  
+    const generateSort = () => {
         const sortParsed = JSON.parse(sort);
         const sortFormatted = {
-            [sortParsed.field]:sortParsed.sort = "asc"?1:-1
-        }
-        return sortFormatted
+          [sortParsed.field]: (sortParsed.sort = "asc" ? 1 : -1),
+        };
+  
+        return sortFormatted;
+      };
+
+      const sortFormatted = Boolean(sort) ? generateSort() : {};
+    if (sort!=={}) {
+        result = result.sort(sortFormatted)
+    } else {
+      result = result.sort("createdAt");
     }
-    const sortFormatted = Boolean(sort)?generateSort():{};
+  
+    if (page) {
+        let pagination = Number(page)
+        
+        if(pagination <1){
+            pagination +=1
+        }
+     
+      const limit = Number(pageSize);
+      const skip = (pagination - 1) * limit;
+  
+      result = result.skip(skip).limit(limit)
+    }
+  
+    const transactions = await result.exec();
+   
+     
 
-    const transactions = await Transaction.find({
-        $or:[
-            {cost:{$regex:new RegExp(search, "i")}},
-            {userId:{$regex:new RegExp(search, "i")}},
-        ],
-    }).sort(sortFormatted).skip(page * pageSize).limit(pageSize)
+  
+    res.status(StatusCodes.OK).json({success:true,total,transactions })
+}
 
 
-    const total = await Transaction.countDocuments({
-        name: {$regex: search , $options: "i"}
-    });
-    res.status(StatusCodes.OK).json({success:true, transactions, total})
+
+const getGeography = async(req, res)=>{
+  try {
+    const users = await User.find({})
+
+  
+    res.status(StatusCodes.OK).json(users)
+  } catch (error) {
+    console.log(error)
+  }
 }
 export {
-    getProducts, getCustomers, getTransactions
+    getGeography,getProducts, getCustomers, getTransactions
 }
