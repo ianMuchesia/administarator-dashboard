@@ -8,7 +8,7 @@ import morgan from 'morgan'
 import clientRoutes from './routes/clientRoutes.js'
 import generalRoutes from './routes/general.js'
 import managementRoutes from './routes/management.js'
-import salesRoutes from './routes/sales.js'
+import salesRoutes from './routes/salesRoutes.js'
 import connectDB from './database/connectDB.js'
 import notFound from './middleware/not-found.js'
 import errorHandlerMiddleWare from './middleware/error-handler.js'
@@ -35,8 +35,8 @@ app.use(cors());
 /* ROUTES */
 app.use('/api/v1/client', clientRoutes)
 app.use('/api/v1/general', generalRoutes)
-app.use('/management', managementRoutes)
-app.use('/sales', salesRoutes)
+app.use('/api/v1/management', managementRoutes)
+app.use('/api/v1/sales', salesRoutes)
 app.use(errorHandlerMiddleWare)
 app.use(notFound)
 
