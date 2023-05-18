@@ -31,11 +31,11 @@ export const api = createApi({
        query:()=>"client/geography",
        providesTags: ["Geography"]
     }),
-    getSales: build.query({
+    getSales: build.query<any, void>({
         query: () => "sales",
         providesTags: ["Sales"],
       }),
    })
   })
 
-  export const {useGetUserQuery, useGetProductsQuery, useGetCustomersQuery,useGetTransactionsQuery, useGetGeographyQuery} = api
+  export const {useGetUserQuery, useGetSalesQuery,useGetProductsQuery, useGetCustomersQuery,useGetTransactionsQuery, useGetGeographyQuery} = api
